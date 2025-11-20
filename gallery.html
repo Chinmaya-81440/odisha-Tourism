@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Odisha Tourism – Gallery</title>
+  <style>
+    :root{
+      --brand:#0b7a75;          /* sea green */
+      --brand-accent:#f7b500;   /* golden */
+      --ink:#102a43;            /* deep ink */
+      --muted:#627d98;          /* slate */
+      --bg:#f7fafc;             /* page */
+      --card:#ffffff;           /* surfaces */
+      --shadow:0 10px 25px rgba(2,12,27,.09);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--ink); background:var(--bg); line-height:1.6;}
+    a{color:inherit; text-decoration:none}
+
+    /* Header */
+    .header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(255,255,255,.7); border-bottom:1px solid rgba(2,12,27,.06)}
+    .nav{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; gap:20px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand__logo{width:42px; height:42px; border-radius:12px; display:inline-block; background:linear-gradient(135deg,var(--brand),#0aa1a0)}
+    .brand__name{font-weight:800; letter-spacing:.3px}
+    .links{margin-left:auto; display:flex; align-items:center; gap:18px}
+    .links a{font-weight:700; position:relative}
+    .links a:after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--brand);
+      transition:width .25s ease}
+    .links a:hover:after{width:100%}
+    .cta{appearance:none; border:0; background:var(--brand); color:#fff; padding:10px 16px; border-radius:999px;
+      font-weight:800; box-shadow:var(--shadow); cursor:pointer; transition:transform .15s ease}
+    .cta:hover{transform:translateY(-2px)}
+
+    /* Hero */
+    .hero{position:relative; min-height:44vh; display:grid; place-items:center; text-align:center; overflow:hidden}
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(rgba(16,42,67,.45),rgba(16,42,67,.35)),
+        url("image copy 25.png") center/cover no-repeat;
+      filter:saturate(105%);
+    }
+    .hero__content{position:relative; color:#fff; padding:0 20px; max-width:960px}
+    .hero h1{font-size:clamp(36px,6.5vw,56px); line-height:1.08; margin:10px 0 6px}
+    .hero p{font-size:clamp(16px,2.6vw,20px); opacity:.95; margin:0 auto 14px}
+
+    /* Section & chips */
+    .section{max-width:1200px; margin:60px auto; padding:0 20px}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center}
+    .chip{padding:8px 12px; border:1px solid rgba(2,12,27,.12); border-radius:999px; background:#fff; font-weight:700; color:var(--ink)}
+
+    /* Masonry Gallery */
+    .masonry{columns:4 260px; column-gap:16px; margin-top:20px}
+    .tile{break-inside:avoid; margin:0 0 16px; position:relative; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); background:#fff}
+    .tile img{display:block; width:100%; height:auto; transition:transform .35s ease, filter .35s ease}
+    .tile:hover img{transform:scale(1.04); filter:saturate(110%)}
+    .caption{position:absolute; left:10px; bottom:10px; background:rgba(255,255,255,.9); color:#0f2a43; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800; letter-spacing:.3px}
+
+    /* Lightbox (CSS-only using :target) */
+    .lightbox{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.75); z-index:60; padding:24px}
+    .lightbox:target{display:grid}
+    .lightbox__img{max-width:min(96vw,1200px); max-height:86vh; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    .close{position:fixed; top:18px; right:18px; width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#fff; color:#111; font-weight:900}
+    .lightbox:target .close{animation:pop .2s ease}
+    @keyframes pop{from{transform:scale(.94); opacity:0}to{transform:scale(1); opacity:1}}
+
+    /* Footer */
+    footer{padding:36px 20px 60px; border-top:1px solid rgba(2,12,27,.06); background:#fff}
+    .foot{max-width:1200px; margin:auto; display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center}
+    .socials{display:flex; gap:10px}
+    .socials a{width:42px; height:42px; display:grid; place-items:center; border-radius:12px; border:1px solid rgba(2,12,27,.1)}
+
+    /* Small */
+    @media (max-width:640px){ .chips{justify-content:flex-start} }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand__logo" aria-hidden></span>
+        <span class="brand__name">Odisha Tourism</span>
+      </a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="gallery.html" style="color:var(--brand)">Gallery</a>
+        <a href="about.html">About</a>
+        <button class="cta" onclick="location.href='#'">Plan Trip</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1>Photo Gallery</h1>
+      <p>A glimpse before the journey begins — temples, coasts and wild sanctuaries of Odisha.</p>
+    </div>
+  </section>
+
+  <!-- Filters (visual only) -->
+  <section class="section">
+    <div class="chips" aria-label="categories (visual only)">
+      <span class="chip">All</span>
+      <span class="chip">Temples</span>
+      <span class="chip">Beaches</span>
+      <span class="chip">Lakes</span>
+      <span class="chip">Forests</span>
+      <span class="chip">Crafts</span>
+    </div>
+
+    <!-- Masonry -->
+    <div class="masonry">
+      <!-- 1 Konark -->
+      <a class="tile" href="#img1" title="Konark carvings · Temples">
+        <img src="image copy 12.png" alt="Konark carvings">
+        <span class="caption">Konark · Temples</span>
+      </a>
+      <!-- 2 Puri Beach -->
+      <a class="tile" href="#img2" title="Puri Golden Beach · Beaches">
+        <img src="image copy 18.png" alt="Puri beach">
+        <span class="caption">Puri · Beaches</span>
+      </a>
+      <!-- 3 Chilika -->
+      <a class="tile" href="#img3" title="Chilika Lake · Lakes">
+        <img src="image copy 19.png" alt="Chilika lake">
+        <span class="caption">Chilika · Lakes</span>
+      </a>
+      <!-- 4 Lingaraj -->
+      <a class="tile" href="#img4" title="Bhubaneswar Temples · Temples">
+        <img src="image copy 17.png" alt="Bhubaneswar temple">
+        <span class="caption">Bhubaneswar · Temples</span>
+      </a>
+      <!-- 5 Forest -->
+      <a class="tile" href="#img5" title="Forest Trails · Forests">
+        <img src="https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=1200&auto=format&fit=crop" alt="Forest trail">
+        <span class="caption">Similipal · Forests</span>
+      </a>
+      <!-- 6 Boat -->
+      <a class="tile" href="#img6" title="Boating · Lakes">
+        <img src="image copy 26.png" alt="Boat ride">
+        <span class="caption">Boating · Lakes</span>
+      </a>
+      <!-- 7 Crafts -->
+      <a class="tile" href="#img7" title="Crafts & Handlooms · Crafts">
+        <img src="image copy 27.png" alt="Handicrafts">
+        <span class="caption">Raghurajpur · Crafts</span>
+      </a>
+      <!-- 8 City -->
+      <a class="tile" href="#img8" title="Old Town · Heritage">
+        <img src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1200&auto=format&fit=crop" alt="Old town temple">
+        <span class="caption">Old Town · Heritage</span>
+      </a>
+      <!-- 9 Festival -->
+      <a class="tile" href="#img9" title="Festivals · Culture">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Festival lights">
+        <span class="caption">Festivals · Culture</span>
+      </a>
+      <!-- 10 Coastline -->
+      <a class="tile" href="#img10" title="Coastal Drive · Beaches">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Coastal road">
+        <span class="caption">Marine Drive · Beaches</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Lightbox targets -->
+  <div id="img1" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1589644554511-95d143c4224b?q=80&w=2000&auto=format&fit=crop" alt="Konark carvings large">
+  </div>
+  <div id="img2" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1604335399108-6c7db1723ad6?q=80&w=2000&auto=format&fit=crop" alt="Puri beach large">
+  </div>
+  <div id="img3" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=2000&auto=format&fit=crop" alt="Chilika large">
+  </div>
+  <div id="img4" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1593697820900-51b2e0b2a11e?q=80&w=2000&auto=format&fit=crop" alt="Temple large">
+  </div>
+  <div id="img5" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=2000&auto=format&fit=crop" alt="Forest large">
+  </div>
+  <div id="img6" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1533460004989-cef01064af03?q=80&w=2000&auto=format&fit=crop" alt="Boat ride large">
+  </div>
+  <div id="img7" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1495975832345-8215fca54c3b?q=80&w=2000&auto=format&fit=crop" alt="Crafts large">
+  </div>
+  <div id="img8" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=2000&auto=format&fit=crop" alt="Old town large">
+  </div>
+  <div id="img9" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop" alt="Festival large">
+  </div>
+  <div id="img10" class="lightbox">
+    <a class="close" href="#"></a>
+    <img class="lightbox__img" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop" alt="Coast large">
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div style="display:flex; align-items:center; gap:10px; font-weight:800">
+        <span class="brand__logo" aria-hidden></span>
+        Odisha Tourism
+      </div>
+      <div class="socials" aria-label="social links">
+        <a href="#" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" title="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.1c1 12-12 12-18 7 2.2.1 4.3-.6 6-2C3 10 1.5 5.5 4 4c2.2 2.6 5.6 4.1 9 4 0-2 1.7-3.6 3.8-3.6 1.1 0 2 .4 2.7 1z"/></svg>
+        </a>
+        <a href="#" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0 1.94 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

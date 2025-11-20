@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Odisha Tourism – About</title>
+  <style>
+    :root{
+      --brand:#0b7a75;          /* sea green */
+      --brand-accent:#f7b500;   /* golden */
+      --ink:#102a43;            /* deep ink */
+      --muted:#627d98;          /* slate */
+      --bg:#f7fafc;             /* page */
+      --card:#ffffff;           /* surfaces */
+      --shadow:0 10px 25px rgba(2,12,27,.09);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--ink); background:var(--bg); line-height:1.6;}
+    a{color:inherit; text-decoration:none}
+
+    /* Header */
+    .header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(255,255,255,.7); border-bottom:1px solid rgba(2,12,27,.06)}
+    .nav{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; gap:20px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand__logo{width:42px; height:42px; border-radius:12px; display:inline-block; background:linear-gradient(135deg,var(--brand),#0aa1a0)}
+    .brand__name{font-weight:800; letter-spacing:.3px}
+    .links{margin-left:auto; display:flex; align-items:center; gap:18px}
+    .links a{font-weight:700; position:relative}
+    .links a:after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--brand);
+      transition:width .25s ease}
+    .links a:hover:after{width:100%}
+    .cta{appearance:none; border:0; background:var(--brand); color:#fff; padding:10px 16px; border-radius:999px;
+      font-weight:800; box-shadow:var(--shadow); cursor:pointer; transition:transform .15s ease}
+    .cta:hover{transform:translateY(-2px)}
+
+    /* Hero */
+    .hero{position:relative; min-height:44vh; display:grid; place-items:center; text-align:center; overflow:hidden}
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(rgba(16,42,67,.45),rgba(16,42,67,.35)),
+        url("image copy 30.png") center/cover no-repeat;
+      filter:saturate(105%);
+    }
+    .hero__content{position:relative; color:#fff; padding:0 20px; max-width:960px}
+    .hero h1{font-size:clamp(36px,6.5vw,56px); line-height:1.08; margin:10px 0 6px}
+    .hero p{font-size:clamp(16px,2.6vw,20px); opacity:.95; margin:0 auto 14px}
+
+    /* Layout helpers */
+    .section{max-width:1200px; margin:60px auto; padding:0 20px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px}
+    .lead{color:var(--muted)}
+    h2{font-size:clamp(28px,4.6vw,40px); margin:0 0 10px}
+
+    /* Mission */
+    .mission{display:grid; grid-template-columns:1.2fr .8fr; gap:20px; align-items:center}
+    .mission__img{border-radius:18px; aspect-ratio:16/10; background:
+      linear-gradient(135deg,rgba(11,122,117,.15),rgba(247,181,0,.15)),
+      url("image copy 30.png") center/cover no-repeat}
+    @media (max-width:900px){ .mission{grid-template-columns:1fr} }
+
+    /* Stats */
+    .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+    .stat{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:18px; text-align:center}
+    .stat h3{margin:0; font-size:28px; color:var(--brand)}
+    .stat p{margin:6px 0 0; color:var(--muted)}
+    @media (max-width:800px){ .stats{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:520px){ .stats{grid-template-columns:1fr} }
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:26px}
+    .timeline:before{content:""; position:absolute; left:9px; top:0; bottom:0; width:2px; background:linear-gradient(#cfe8e6,#0b7a75)}
+    .step{position:relative; margin:0 0 18px; padding:14px 16px; background:#fff; border-radius:14px; box-shadow:var(--shadow)}
+    .step:before{content:""; position:absolute; left:-25px; top:16px; width:14px; height:14px; border:3px solid #0b7a75; background:#fff; border-radius:50%}
+
+    /* Team / Credits */
+    .team{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .member{grid-column:span 3; background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+    .avatar{aspect-ratio:1/1; background:#e9f7f6 center/cover no-repeat}
+    .member__body{padding:14px 16px}
+    .role{color:var(--muted); font-size:14px}
+    @media (max-width:1000px){ .member{grid-column:span 4} }
+    @media (max-width:700px){ .member{grid-column:span 6} }
+    @media (max-width:520px){ .member{grid-column:span 12} }
+
+    /* CTA band */
+    .band{margin:70px 0; background:linear-gradient(135deg,var(--brand),#0aa1a0);
+      color:#fff; border-radius:24px; padding:28px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .band p{margin:6px 0 0; opacity:.92}
+    .band .cta{background:#fff; color:var(--ink)}
+    @media (max-width:800px){.band{flex-direction:column; text-align:center}}
+
+    /* Footer */
+    footer{padding:36px 20px 60px; border-top:1px solid rgba(2,12,27,.06); background:#fff}
+    .foot{max-width:1200px; margin:auto; display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center}
+    .socials{display:flex; gap:10px}
+    .socials a{width:42px; height:42px; display:grid; place-items:center; border-radius:12px; border:1px solid rgba(2,12,27,.1)}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand__logo" aria-hidden></span>
+        <span class="brand__name">Odisha Tourism</span>
+      </a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="experiences.html">Experiences</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html" style="color:var(--brand)">About</a>
+        <button class="cta" onclick="location.href='mailto:hello@odishatourism.example'">Contact</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <h1>About Odisha Tourism</h1>
+      <p>India’s Best Kept Secret—told through heritage, coasts and wild sanctuaries. Here’s our story and mission.</p>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section">
+    <div class="grid">
+      <div class="card mission">
+        <div>
+          <h2>Our Mission</h2>
+          <p class="lead">Inspire responsible travel across Odisha by celebrating culture, conserving nature, and empowering local communities.</p>
+          <ul>
+            <li>Showcase authentic experiences—temple trails, beaches, wetlands, forests and crafts.</li>
+            <li>Support eco-stays and community guides for inclusive growth.</li>
+            <li>Preserve heritage and biodiversity for future generations.</li>
+          </ul>
+        </div>
+        <div class="mission__img" role="img" aria-label="Odisha landscape collage"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section">
+    <h2>Quick Stats</h2>
+    <p class="lead">A snapshot of what makes Odisha unforgettable.</p>
+    <div class="stats">
+      <div class="stat"><h3>500+</h3><p>Temples & Heritage Sites</p></div>
+      <div class="stat"><h3>480 km</h3><p>Pristine Coastline</p></div>
+      <div class="stat"><h3>1,100+</h3><p>Bird Species at Chilika</p></div>
+      <div class="stat"><h3>7</h3><p>Major National Parks & Sanctuaries</p></div>
+    </div>
+  </section>
+
+  <!-- Story / Timeline -->
+  <section class="section">
+    <div class="grid">
+      <div class="card">
+        <h2>Our Story</h2>
+        <div class="timeline">
+          <div class="step">
+            <strong>Roots in Heritage</strong>
+            <p class="lead">We began by mapping temple architecture and the living traditions around them.</p>
+          </div>
+          <div class="step">
+            <strong>Nature at Heart</strong>
+            <p class="lead">Chilika’s wetlands and Similipal’s forests inspired our eco-first approach.</p>
+          </div>
+          <div class="step">
+            <strong>Community Focus</strong>
+            <p class="lead">Partnered with artisans, boatmen and guides to craft equitable experiences.</p>
+          </div>
+          <div class="step">
+            <strong>Today & Tomorrow</strong>
+            <p class="lead">Curating responsible itineraries where visitors, locals and nature all thrive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team / Credits -->
+  <section class="section">
+    <h2>Team & Credits</h2>
+    <p class="lead">A tiny, passionate crew + countless local partners who make these journeys possible.</p>
+    <div class="team">
+      <div class="member">
+        <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop')"></div>
+        <div class="member__body">
+          <strong>Program Lead</strong>
+          <div class="role">Heritage & Community</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop')"></div>
+        <div class="member__body">
+          <strong>Nature Guide</strong>
+          <div class="role">Wetlands & Forests</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop')"></div>
+        <div class="member__body">
+          <strong>Experience Designer</strong>
+          <div class="role">Routes & Stays</div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop')"></div>
+        <div class="member__body">
+          <strong>Crafts Liaison</strong>
+          <div class="role">Pipili & Raghurajpur</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <div class="section">
+    <div class="band">
+      <div>
+        <h3 style="margin:0">Travel responsibly with us</h3>
+        <p>Tell us your dates and interests—temples, sea, forests or food—and we’ll suggest a mindful itinerary.</p>
+      </div>
+      <a class="cta" href="mailto:hello@odishatourism.example">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div style="display:flex; align-items:center; gap:10px; font-weight:800">
+        <span class="brand__logo" aria-hidden></span>
+        Odisha Tourism
+      </div>
+      <div class="socials" aria-label="social links">
+        <a href="#" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" title="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.1c1 12-12 12-18 7 2.2.1 4.3-.6 6-2C3 10 1.5 5.5 4 4c2.2 2.6 5.6 4.1 9 4 0-2 1.7-3.6 3.8-3.6 1.1 0 2 .4 2.7 1z"/></svg>
+        </a>
+        <a href="#" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0 1.94 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

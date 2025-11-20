@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Odisha Tourism – Experiences</title>
+  <style>
+    :root{
+      --brand:#0b7a75;          /* sea green */
+      --brand-accent:#f7b500;   /* golden */
+      --ink:#102a43;            /* deep ink */
+      --muted:#627d98;          /* slate */
+      --bg:#f7fafc;             /* page */
+      --card:#ffffff;           /* surfaces */
+      --shadow:0 10px 25px rgba(2,12,27,.09);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--ink); background:var(--bg); line-height:1.6;}
+    a{color:inherit; text-decoration:none}
+
+    /* Header */
+    .header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(255,255,255,.7); border-bottom:1px solid rgba(2,12,27,.06)}
+    .nav{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; gap:20px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand__logo{width:42px; height:42px; border-radius:12px; display:inline-block; background:linear-gradient(135deg,var(--brand),#0aa1a0)}
+    .brand__name{font-weight:800; letter-spacing:.3px}
+    .links{margin-left:auto; display:flex; align-items:center; gap:18px}
+    .links a{font-weight:700; position:relative}
+    .links a:after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--brand);
+      transition:width .25s ease}
+    .links a:hover:after{width:100%}
+    .cta{appearance:none; border:0; background:var(--brand); color:#fff; padding:10px 16px; border-radius:999px;
+      font-weight:800; box-shadow:var(--shadow); cursor:pointer; transition:transform .15s ease}
+    .cta:hover{transform:translateY(-2px)}
+
+    /* Hero */
+    .hero{position:relative; min-height:56vh; display:grid; place-items:center; text-align:center; overflow:hidden}
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(rgba(16,42,67,.45),rgba(16,42,67,.35)),
+        url("https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1920&auto=format&fit=crop") center/cover no-repeat;
+      filter:saturate(105%);
+    }
+    .hero__content{position:relative; color:#fff; padding:0 20px; max-width:960px}
+    .hero h1{font-size:clamp(36px,6.5vw,56px); line-height:1.08; margin:10px 0 6px}
+    .hero p{font-size:clamp(16px,2.6vw,20px); opacity:.95; margin:0 auto 14px}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px}
+    .chip{padding:8px 12px; border:1px solid rgba(255,255,255,.45); color:#fff; border-radius:999px; font-weight:700; background:rgba(255,255,255,.12)}
+
+    /* Section */
+    .section{max-width:1200px; margin:70px auto; padding:0 20px}
+    .section h2{font-size:clamp(28px,4.6vw,40px); margin:0 0 10px}
+    .section p.lead{color:var(--muted); margin:0 0 26px}
+
+    /* Grid */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{grid-column:span 4; background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      transform:translateY(0); transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px); box-shadow:0 16px 40px rgba(2,12,27,.16)}
+    .thumb{aspect-ratio:16/10; background:#ddd center/cover no-repeat; position:relative}
+    .badge{position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.9); color:#0f2a43;
+      padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800; letter-spacing:.3px}
+    .body{padding:16px 16px 18px}
+    .title{margin:8px 0 6px; font-size:20px; font-weight:800}
+    .meta{display:flex; align-items:center; gap:12px; color:var(--muted); font-size:14px}
+    .meta svg{opacity:.8}
+    @media (max-width:1000px){.card{grid-column:span 6}}
+    @media (max-width:640px){.card{grid-column:span 12}}
+
+    /* Callout band */
+    .band{margin:70px 0; background:linear-gradient(135deg,var(--brand),#0aa1a0);
+      color:#fff; border-radius:24px; padding:28px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .band p{margin:6px 0 0; opacity:.92}
+    .band .cta{background:#fff; color:var(--ink)}
+    @media (max-width:800px){.band{flex-direction:column; text-align:center}}
+
+    /* Footer */
+    footer{padding:36px 20px 60px; border-top:1px solid rgba(2,12,27,.06); background:#fff}
+    .foot{max-width:1200px; margin:auto; display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center}
+    .socials{display:flex; gap:10px}
+    .socials a{width:42px; height:42px; display:grid; place-items:center; border-radius:12px; border:1px solid rgba(2,12,27,.1)}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand__logo" aria-hidden></span>
+        <span class="brand__name">Odisha Tourism</span>
+      </a>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="destination.html">Destinations</a>
+        <a href="experiences.html" style="color:var(--brand)">Experiences</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <button class="cta" onclick="location.href='#plan'">Plan Trip</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__content">
+      <span class="chip">Handpicked Experiences</span>
+      <h1>Feel Odisha — beyond the checklist</h1>
+      <p>Temple bells at dawn, salt-kissed wind by noon, and forest hush by dusk. Choose an experience, not just a spot on a map.</p>
+      <div class="chips" aria-label="filters (visual only)">
+        <span class="chip">Temple Trails</span>
+        <span class="chip">Beaches</span>
+        <span class="chip">Wildlife</span>
+        <span class="chip">Crafts & Handlooms</span>
+        <span class="chip">Food Trails</span>
+        <span class="chip">Festivals</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences grid -->
+  <section class="section">
+    <h2>Signature Experiences</h2>
+    <p class="lead">Pick your mood and start planning. Each card hints at what to expect and how long to keep aside.</p>
+
+    <div class="grid">
+      <!-- Temple Trails -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 17.png');">
+          <span class="badge">Temple Trails</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Bhubaneswar → Puri → Konark Circuit</h3>
+          <div class="meta">
+            <!-- clock icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>1–2 days • Heritage</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Beaches & Boating -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 18.png');">
+          <span class="badge">Beaches & Boating</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Puri Golden Beach & Marine Drive</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Half day • Relax</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Wildlife & Wetlands -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 19.png');">
+          <span class="badge">Wildlife & Wetlands</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Chilika Lake – Dolphin & Birding</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>1 day • Eco</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Forest Trails -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=1400&auto=format&fit=crop');">
+          <span class="badge">Forest Trails</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Similipal – Waterfalls & Wildlife</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>2–3 days • Adventure</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Crafts & Handlooms -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 20.png');">
+          <span class="badge">Crafts & Handlooms</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Pipili Appliqué & Raghurajpur Pattachitra</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Half–1 day • Culture</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Food Trails -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 21.png');">
+          <span class="badge">Food Trails</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Temple Mahaprasad & Coastal Seafood</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Half day • Culinary</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- City Heritage Walk -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 22.png');">
+          <span class="badge">Heritage Walks</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Old Town Bhubaneswar – Temples & Tales</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>3–4 hrs • Guided</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Festivals -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 23.png');">
+          <span class="badge">Festivals</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Rath Yatra & Konark Dance Festival</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Seasonal • Culture</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Dhauli Peace & History -->
+      <article class="card">
+        <div class="thumb" style="background-image:url('image copy 24.png');">
+          <span class="badge">Peace & History</span>
+        </div>
+        <div class="body">
+          <h3 class="title">Dhauli Shanti Stupa – Calm by the Daya</h3>
+          <div class="meta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>2–3 hrs • Easy</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <div class="section">
+    <div class="band">
+      <div>
+        <h3 style="margin:0">Need help stitching these into an itinerary?</h3>
+        <p>Tell us your dates and vibe—temples, sea, forests or food—and we’ll map your perfect 3–5 day plan.</p>
+      </div>
+      <button class="cta" onclick="alert('Thanks! A travel specialist will reach out shortly.')">Get Custom Plan</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div style="display:flex; align-items:center; gap:10px; font-weight:800">
+        <span class="brand__logo" aria-hidden></span>
+        Odisha Tourism
+      </div>
+      <div class="socials" aria-label="social links">
+        <a href="#" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" title="Twitter / X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.1c1 12-12 12-18 7 2.2.1 4.3-.6 6-2C3 10 1.5 5.5 4 4c2.2 2.6 5.6 4.1 9 4 0-2 1.7-3.6 3.8-3.6 1.1 0 2 .4 2.7 1z"/></svg>
+        </a>
+        <a href="#" title="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

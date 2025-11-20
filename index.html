@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odisha Tourism – India's Best Kept Secret</title>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <style>
+    :root{
+      --brand:#0b7a75;          /* sea green */
+      --brand-accent:#f7b500;   /* golden */
+      --ink:#102a43;            /* deep ink */
+      --muted:#627d98;          /* slate */
+      --bg:#f7fafc;             /* page */
+      --card:#ffffff;           /* surfaces */
+      --shadow:0 10px 25px rgba(2,12,27,.09);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--ink); background:var(--bg); line-height:1.6;
+    }
+
+    /* ========= Header ========= */
+    .header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(255,255,255,.7); border-bottom:1px solid rgba(2,12,27,.06)}
+    .nav{max-width:1200px; margin:auto; padding:14px 20px; display:flex; align-items:center; gap:20px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .brand__logo{width:42px; height:42px; border-radius:12px; display:grid; place-items:center; color:white;
+      background:linear-gradient(135deg,var(--brand),#0aa1a0)}
+    .brand__name{font-weight:800; letter-spacing:.3px; color:var(--ink)}
+
+    .links{margin-left:auto; display:flex; align-items:center; gap:18px}
+    .links a{position:relative; text-decoration:none; color:var(--ink); font-weight:600}
+    .links a:after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--brand);
+      transition:width .28s ease}
+    .links a:hover:after{width:100%}
+
+    .cta{appearance:none; border:0; background:var(--brand); color:#fff; padding:10px 16px; border-radius:999px;
+      font-weight:700; box-shadow:var(--shadow); cursor:pointer; transition:transform .15s ease}
+    .cta:hover{transform:translateY(-2px)}
+
+    .hamburger{display:none; margin-left:auto; width:44px; height:44px; border-radius:12px; border:1px solid rgba(2,12,27,.1);
+      background:#fff; place-items:center; cursor:pointer}
+    .hamburger span{width:22px; height:2px; background:var(--ink); position:relative; display:block}
+    .hamburger span:before,.hamburger span:after{content:""; position:absolute; left:0; width:100%; height:100%; background:var(--ink)}
+    .hamburger span:before{top:-6px} .hamburger span:after{top:6px}
+
+    @media (max-width: 900px){
+      .links{display:none}
+      .hamburger{display:grid}
+      .drawer{position:fixed; inset:0 0 0 auto; width:min(78vw,340px); background:#fff; box-shadow:-20px 0 40px rgba(0,0,0,.08);
+        transform:translateX(100%); transition:transform .35s ease; z-index:60; padding:24px}
+      .drawer.open{transform:translateX(0)}
+      .drawer a{display:block; color:var(--ink); text-decoration:none; font-weight:700; padding:14px 6px; border-bottom:1px dashed rgba(2,12,27,.08)}
+      .drawer .cta{width:100%; margin-top:12px}
+      .backdrop{position:fixed; inset:0; background:rgba(2,12,27,.35); opacity:0; pointer-events:none; transition:opacity .35s ease}
+      .backdrop.show{opacity:1; pointer-events:auto}
+    }
+
+    /* ========= Hero ========= */
+    .hero{position:relative; min-height:92vh; display:grid; place-items:center; text-align:center; overflow:hidden}
+    .hero__bg{position:absolute; inset:0; background:
+      linear-gradient(rgba(16,42,67,.45),rgba(16,42,67,.35)),
+      url("deomali-koraput-odisha.jpeg");
+      background-size:cover; background-position:center; will-change:transform; transform:translateY(0); transition:transform .3s ease}
+    .hero__content{position:relative; padding:0 20px; color:#fff; max-width:960px}
+    .eyebrow{display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.35); backdrop-filter:blur(4px); font-weight:700; letter-spacing:.4px}
+    .hero h1{font-size:clamp(38px,7vw,64px); line-height:1.1; margin:18px 0 8px}
+    .hero p{font-size:clamp(16px,2.6vw,20px); opacity:.95; margin:0 auto 22px}
+    .hero .cta{background:var(--brand-accent); color:#2b2b2b}
+
+    /* parallax subtle effect */
+    .hero[data-scrolled] .hero__bg{transform:translateY(calc(var(--scroll,0) * -0.2px))}
+
+    /* ========= Chips ========= */
+    .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px}
+    .chip{padding:8px 12px; border:1px solid rgba(255,255,255,.4); border-radius:999px; font-weight:600; letter-spacing:.2px}
+
+    /* ========= Section wrapper ========= */
+    .section{max-width:1200px; margin:80px auto; padding:0 20px}
+    .section h2{font-size:clamp(28px,4.6vw,40px); margin:0 0 10px}
+    .section p.lead{color:var(--muted); margin:0 0 26px}
+
+    /* ========= Destinations grid ========= */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{grid-column:span 4; background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      transform:translateY(0); transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px); box-shadow:0 16px 40px rgba(2,12,27,.16)}
+    .card__img{aspect-ratio:16/10; background:#ddd; background-size:cover; background-position:center}
+    .card__body{padding:16px 16px 18px}
+    .tag{display:inline-block; font-size:12px; font-weight:800; letter-spacing:.3px; padding:6px 10px; border-radius:999px; color:#0f2a43;
+      background:linear-gradient(180deg,#eaf6f6,#c6f1ef)}
+    .card__title{margin:10px 0 6px; font-size:20px; font-weight:800}
+    .card__meta{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px}
+
+    @media (max-width: 1000px){ .card{grid-column:span 6} }
+    @media (max-width: 640px){ .card{grid-column:span 12} }
+
+    /* ========= Experiences ========= */
+    .pill{display:inline-flex; align-items:center; gap:10px; background:#fff; border:1px solid rgba(2,12,27,.06);
+      padding:14px 16px; border-radius:14px; box-shadow:var(--shadow)}
+    .icons{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+
+    /* ========= Gallery ========= */
+    .masonry{columns:4 280px; column-gap:16px}
+    .masonry img{width:100%; display:block; border-radius:16px; margin:0 0 16px; box-shadow:var(--shadow);
+      transition:transform .25s ease}
+    .masonry img:hover{transform:translateY(-6px)}
+
+    /* ========= CTA band ========= */
+    .band{margin:80px 0; background:linear-gradient(135deg,var(--brand),#0aa1a0);
+      color:#fff; border-radius:24px; padding:32px; display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .band p{margin:6px 0 0; opacity:.92}
+    .band .cta{background:#fff; color:var(--ink)}
+    @media (max-width:800px){.band{flex-direction:column; text-align:center}}
+
+    /* ========= Footer ========= */
+    footer{padding:36px 20px 60px; border-top:1px solid rgba(2,12,27,.06); background:#fff}
+    .foot{max-width:1200px; margin:auto; display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center}
+    .socials{display:flex; gap:10px}
+    .socials a{width:42px; height:42px; display:grid; place-items:center; border-radius:12px;
+      border:1px solid rgba(2,12,27,.1); text-decoration:none; color:var(--ink)}
+
+    /* ========= Scroll reveal ========= */
+    .reveal{opacity:0; transform:translateY(16px); will-change:opacity,transform; transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <span class="brand__logo" aria-hidden>
+          <!-- Konark wheel icon (SVG) -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/>
+            <circle cx="12" cy="12" r="2.2" fill="white"/>
+            <path d="M12 3v6M12 15v6M21 12h-6M3 12h6M5.6 5.6l4.2 4.2M14.2 14.2l4.2 4.2M18.4 5.6l-4.2 4.2M9.8 14.2L5.6 18.4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand__name">Odisha Tourism</span>
+      </a>
+      <div class="links">
+        <a href="destination.html">Destinations</a>
+        <a href="Experince.html">Experiences</a>
+        <a href="plan.html">Plan</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="About.html">About</a>
+        <button class="cta" onclick="document.getElementById('plan').scrollIntoView({behavior:'smooth'})">Book Now</button>
+      </div>
+      <button class="hamburger" id="openDrawer" aria-label="Open Menu"><span></span></button>
+    </nav>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#plan">Plan</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <button class="cta" onclick="document.getElementById('plan').scrollIntoView({behavior:'smooth'})">Book Now</button>
+  </aside>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__content">
+      <span class="eyebrow">India's Best Kept Secret</span>
+      <h1>Explore Odisha — Temples, Coasts & Wild Sanctuaries</h1>
+      <p>From the sun-kissed shores of Puri to the timeless stone of Konark and the iridescent waters of Chilika, discover a land where heritage and nature travel together.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+        <button class="cta" onclick="document.getElementById('destinations').scrollIntoView({behavior:'smooth'})">Start Exploring</button>
+        <button class="cta" style="background:#fff; color:var(--ink)" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">See Gallery</button>
+      </div>
+      <div class="chips" aria-label="popular tags">
+        <span class="chip">Konark Sun Temple</span>
+        <span class="chip">Puri Beach</span>
+        <span class="chip">Chilika Lake</span>
+        <span class="chip">Similipal</span>
+        <span class="chip">Dhauli</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations -->
+  <section class="section reveal" id="destinations">
+    <h2>Top Destinations</h2>
+    <p class="lead">Handpicked places that define Odisha’s spirit — heritage marvels, serene waters and wild forests.</p>
+    <div class="grid">
+      <!-- Puri -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('image.png');"></div>
+        <div class="card__body">
+          <span class="tag">Beach · Culture</span>
+          <h3 class="card__title">Puri & Jagannath</h3>
+          <div class="card__meta">
+            <span>Golden beach, Rath Yatra</span>
+          </div>
+        </div>
+      </article>
+      <!-- Konark -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('Konarka_Temple.jpg');"></div>
+        <div class="card__body">
+          <span class="tag">UNESCO</span>
+          <h3 class="card__title">Konark Sun Temple</h3>
+          <div class="card__meta">
+            <span>13th-century marvel</span>
+          </div>
+        </div>
+      </article>
+      <!-- Chilika -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('image copy.png');"></div>
+        <div class="card__body">
+          <span class="tag">Lagoon</span>
+          <h3 class="card__title">Chilika Lake</h3>
+          <div class="card__meta">
+            <span>Dolphins & migratory birds</span>
+          </div>
+        </div>
+      </article>
+      <!-- Bhubaneswar -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('image copy 2.png');"></div>
+        <div class="card__body">
+          <span class="tag">Temple City</span>
+          <h3 class="card__title">Bhubaneswar</h3>
+          <div class="card__meta">
+            <span>Lingaraj, Khandagiri & Udayagiri</span>
+          </div>
+        </div>
+      </article>
+      <!-- Similipal -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('image copy 3.png');"></div>
+        <div class="card__body">
+          <span class="tag">National Park</span>
+          <h3 class="card__title">Similipal</h3>
+          <div class="card__meta">
+            <span>Tigers, waterfalls & forests</span>
+          </div>
+        </div>
+      </article>
+      <!-- Dhauli -->
+      <article class="card">
+        <div class="card__img" style="background-image:url('image copy 4.png');"></div>
+        <div class="card__body">
+          <span class="tag">Peace Pagoda</span>
+          <h3 class="card__title">Dhauli Shanti Stupa</h3>
+          <div class="card__meta">
+            <span>Legacy of Emperor Ashoka</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Experiences -->
+  <section class="section reveal" id="experiences">
+    <h2>Signature Experiences</h2>
+    <p class="lead">Curated ways to feel Odisha — slow, soulful and unforgettable.</p>
+    <div class="icons">
+      <div class="pill">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+          <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        Temple Trails
+      </div>
+      <div class="pill">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+          <path d="M3 20h18"/><path d="M7 20V4h10v16"/><path d="m17 8 2 2-8 8H9v-2z"/>
+        </svg>
+        Handloom & Crafts
+      </div>
+      <div class="pill">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden>
+          <path d="M3 22l3-3 3 3"/><path d="M6 19V2"/><path d="M9 22l3-3 3 3"/><path d="M12 19V2"/><path d="M15 22l3-3 3 3"/><path d="M18 19V2"/>
+        </svg>
+        Beaches & Boating
+      </div>
+    </div>
+  </section>
+
+  <!-- Plan -->
+  <section class="section reveal" id="plan">
+    <h2>Plan Your Trip</h2>
+    <p class="lead">Pick a season, choose a vibe, and we'll help sketch your route.</p>
+    <div class="grid">
+      <article class="card" style="grid-column:span 6">
+        <div class="card__body">
+          <span class="tag">Best Time</span>
+          <h3 class="card__title">When to Visit</h3>
+          <p>Oct–Mar offers pleasant weather for temples, wildlife and beaches. Monsoons (Jul–Sep) turn forests lush and lakes dramatic.</p>
+        </div>
+      </article>
+      <article class="card" style="grid-column:span 6">
+        <div class="card__body">
+          <span class="tag">Getting Around</span>
+          <h3 class="card__title">Travel Basics</h3>
+          <p>Fly into Bhubaneswar (BBI). Puri & Konark are 1–2 hours by road. Book eco-stays near Chilika; reserve forest lodges for Similipal in advance.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section reveal" id="gallery">
+    <h2>Photo Gallery</h2>
+    <p class="lead">A glimpse before the journey begins.</p>
+    <div class="masonry">
+      <img alt="Konark carvings" src="image copy 5.png"/>
+      <img alt="Puri beach" src="image copy 6.png"/>
+      <img alt="Chilika lake" src="image copy 9.png"/>
+      <img alt="Bhubaneswar temple" src="image copy 7.png"/>
+      <img alt="Forest trail" src="https://images.unsplash.com/photo-1470246973918-29a93221c455?q=80&w=1200&auto=format&fit=crop"/>
+      <img alt="Boat ride" src="image copy 8.png"/>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <div class="section">
+    <div class="band reveal">
+      <div>
+        <h3 style="margin:0">Ready to book your Odisha getaway?</h3>
+        <p>Curated itineraries, trusted stays and local guides — all in one place.</p>
+      </div>
+      <button class="cta" onclick="alert('Thanks! A travel specialist will reach out shortly.')">Get Custom Itinerary</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="about">
+    <div class="foot">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; font-weight:800">
+          <span class="brand__logo" aria-hidden></span>
+          Odisha Tourism
+        </div>
+        <p style="color:var(--muted); max-width:600px; margin:10px 0 0">Official destination guide to the heritage, coast and forests of Odisha. Plan responsibly. Travel kindly.</p>
+      </div>
+      <div class="socials" aria-label="social links">
+        <a href="#" aria-label="Instagram" title="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter" title="Twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M22 4s-.7 2.1-2 3.1c1 12-12 12-18 7 2.2.1 4.3-.6 6-2C3 10 1.5 5.5 4 4c2.2 2.6 5.6 4.1 9 4 0-2 1.7-3.6 3.8-3.6 1.1 0 2 .4 2.7 1z"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube" title="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29.94 29.94 0 0 0 1 12a29.94 29.94 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29.94 29.94 0 0 0 23 12a29.94 29.94 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile drawer
+    const openBtn = document.getElementById('openDrawer');
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('backdrop');
+    function closeDrawer(){drawer.classList.remove('open'); backdrop.classList.remove('show');}
+    openBtn?.addEventListener('click',()=>{drawer.classList.add('open'); backdrop.classList.add('show');});
+    backdrop?.addEventListener('click',closeDrawer);
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeDrawer));
+
+    // Scroll reveal & subtle hero parallax
+    const hero = document.querySelector('.hero');
+    const onScroll = ()=>{
+      const sc = window.scrollY || 0;
+      hero?.style.setProperty('--scroll', sc);
+      hero?.setAttribute('data-scrolled','');
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight*0.88){ el.classList.add('show'); }
+      });
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('load', onScroll);
+  </script>
+</body>
+</html>
